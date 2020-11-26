@@ -33,7 +33,7 @@ public class OrganiserList extends ArrayAdapter<Organiser> {
         TextView textViewBeaconId=(TextView)listViewItem.findViewById(R.id.textViewOrganiserBeaconID);
         Organiser organiser=organizerList.get(position);
         textViewName.setText(organiser.getOrganiserName());
-        textViewBeaconId.setText(organiser.getOrganiserId());
+        textViewBeaconId.setText(organiser.getOrganiserBeaconId());
         return listViewItem;
     }
 }

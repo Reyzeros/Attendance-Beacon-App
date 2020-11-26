@@ -4,20 +4,31 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminSetup extends Activity {
 
     DatabaseReference databaseOrganisers;
     EditText editTextOrganiserName, editTextBeaconID,editTextGroupName;
     Button buttonAddOrganiser, buttonAddGroup;
+    ListView listViewOrganisers;
+    List<Organiser> organiserList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +38,10 @@ public class AdminSetup extends Activity {
 
         editTextOrganiserName=(EditText) findViewById(R.id.editTextOrganiserName);
         editTextBeaconID=(EditText) findViewById(R.id.editTextOrganiserBeaconId);
-        editTextGroupName=(EditText) findViewById(R.id.editTextGroupName);
+        organiserList=new ArrayList<>();
         buttonAddOrganiser=(Button) findViewById(R.id.buttonAddOrganiser);
-        buttonAddGroup=(Button) findViewById(R.id.buttonAddGroup);
+        listViewOrganisers=(ListView) findViewById(R.id.listViewOrganisers);
+
     }
     public void onAddOrganiserClicked(View view){
     addOrganiser();
@@ -62,5 +74,27 @@ public class AdminSetup extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        databaseOrganisers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                organiserList.clear();
+                for(DataSnapshot organiserSnapshot: snapshot.getChildren()){
+                    Organiser organiser=organiserSnapshot.getValue(Organiser.class);
+                    organiserList.add(organiser);
+                }
+                OrganiserList adapter=new OrganiserList(AdminSetup.this,organiserList);
+                listViewOrganisers.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
