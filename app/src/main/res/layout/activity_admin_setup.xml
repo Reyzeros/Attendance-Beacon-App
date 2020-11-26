@@ -1,0 +1,127 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminSetup" >
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="282dp"
+        android:layout_marginBottom="690dp"
+        android:text="Add Organiser:" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="164dp"
+        android:layout_height="31dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="233dp"
+        android:layout_marginBottom="479dp"
+        android:text="Add Group to organiser:" />
+
+    <EditText
+        android:id="@+id/editTextOrganiserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="178dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="653dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/editTextGroupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="153dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="232dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Group Name" />
+
+    <EditText
+        android:id="@+id/editTextOrganiserBeaconId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="178dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="575dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Beacon ID" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="133dp"
+        android:layout_height="29dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="243dp"
+        android:layout_marginBottom="654dp"
+        android:text="Name and Surname:" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="133dp"
+        android:layout_height="29dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="257dp"
+        android:layout_marginBottom="231dp"
+        android:text="Group Name:" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="133dp"
+        android:layout_height="29dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="244dp"
+        android:layout_marginBottom="614dp"
+        android:text="Password:" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="133dp"
+        android:layout_height="29dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="247dp"
+        android:layout_marginBottom="575dp"
+        android:text="Your Beacon ID:" />
+
+    <Button
+        android:id="@+id/buttonAddOrganiser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="510dp"
+        android:text="Add" />
+
+    <Button
+        android:id="@+id/buttonAddGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="159dp"
+        android:text="Add" />
+</RelativeLayout>
