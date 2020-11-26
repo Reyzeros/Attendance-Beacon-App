@@ -10,14 +10,20 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class AdminSetup extends Activity {
 
+    DatabaseReference databaseOrganisers;
     EditText editTextOrganiserName, editTextBeaconID,editTextGroupName;
     Button buttonAddOrganiser, buttonAddGroup;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_setup);
+
+        databaseOrganisers= FirebaseDatabase.getInstance().getReference("Organisers");
 
         editTextOrganiserName=(EditText) findViewById(R.id.editTextOrganiserName);
         editTextBeaconID=(EditText) findViewById(R.id.editTextOrganiserBeaconId);
@@ -33,6 +39,10 @@ public class AdminSetup extends Activity {
         String organiserName=editTextOrganiserName.getText().toString().trim();
         String beaconId=editTextBeaconID.getText().toString().trim();
         if(!TextUtils.isEmpty(organiserName)&&!TextUtils.isEmpty(beaconId)){
+            String organiserId=databaseOrganisers.push().getKey();
+            Organiser organiser= new Organiser(organiserId,organiserName,beaconId);
+            databaseOrganisers.child(organiserId).setValue(organiser);
+            Toast.makeText(this,"Organiser Added!", Toast.LENGTH_LONG).show();
         }
         else{
             Toast.makeText(this,"Name and Id cannot be empty!", Toast.LENGTH_LONG).show();
