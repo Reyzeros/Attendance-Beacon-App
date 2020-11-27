@@ -25,22 +25,30 @@ import java.util.List;
 public class AdminSetup extends Activity {
 
     DatabaseReference databaseOrganisers;
+    DatabaseReference databaseGroups;
     EditText editTextOrganiserName, editTextBeaconID,editTextGroupName;
     Button buttonAddOrganiser, buttonAddGroup;
     ListView listViewOrganisers;
+    ListView listViewGroups;
     List<Organiser> organiserList;
+    List<Group> groupList;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_setup);
 
         databaseOrganisers= FirebaseDatabase.getInstance().getReference("Organisers");
+        databaseGroups=FirebaseDatabase.getInstance().getReference("Groups");
 
         editTextOrganiserName=(EditText) findViewById(R.id.editTextOrganiserName);
         editTextBeaconID=(EditText) findViewById(R.id.editTextOrganiserBeaconId);
         organiserList=new ArrayList<>();
+        groupList=new ArrayList<>();
         buttonAddOrganiser=(Button) findViewById(R.id.buttonAddOrganiser);
         listViewOrganisers=(ListView) findViewById(R.id.listViewOrganisers);
+        listViewGroups=(ListView) findViewById(R.id.listViewGroups);
+        buttonAddGroup=(Button) findViewById(R.id.buttonAddGroup);
+        editTextGroupName=(EditText) findViewById(R.id.editTextGroupName);
 
     }
     public void onAddOrganiserClicked(View view){
@@ -58,6 +66,22 @@ public class AdminSetup extends Activity {
         }
         else{
             Toast.makeText(this,"Name and Id cannot be empty!", Toast.LENGTH_LONG).show();
+        }
+    }
+    public void onAddGroupClicked(View view){
+        addGroup();
+    }
+
+    private void addGroup(){
+        String groupName=editTextGroupName.getText().toString().trim();
+        if(!TextUtils.isEmpty(groupName)){
+            String groupId=databaseGroups.push().getKey();
+            Group group= new Group(groupId,groupName);
+            databaseGroups.child(groupId).setValue(group);
+            Toast.makeText(this,"Group Added!", Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(this,"Name cannot be empty!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -89,6 +113,24 @@ public class AdminSetup extends Activity {
                 }
                 OrganiserList adapter=new OrganiserList(AdminSetup.this,organiserList);
                 listViewOrganisers.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        databaseGroups.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                groupList.clear();
+                for(DataSnapshot groupSnapshot: snapshot.getChildren()){
+                    Group group=groupSnapshot.getValue(Group.class);
+                    groupList.add(group);
+                }
+                GroupList adapter=new GroupList(AdminSetup.this,groupList);
+                listViewGroups.setAdapter(adapter);
+
             }
 
             @Override
