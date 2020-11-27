@@ -1,9 +1,11 @@
 package org.altbeacon.beaconreference;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminSetup extends Activity {
-
+public static final String GROUP_NAME="groupName";
+public static final String GROUP_ID="groupID";
     DatabaseReference databaseOrganisers;
     DatabaseReference databaseGroups;
     EditText editTextOrganiserName, editTextBeaconID,editTextGroupName;
@@ -49,6 +52,17 @@ public class AdminSetup extends Activity {
         listViewGroups=(ListView) findViewById(R.id.listViewGroups);
         buttonAddGroup=(Button) findViewById(R.id.buttonAddGroup);
         editTextGroupName=(EditText) findViewById(R.id.editTextGroupName);
+        listViewGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Group group= groupList.get(i);
+                Intent intent=new Intent(getApplicationContext(),AddUser.class);
+                intent.putExtra("GROUP_ID",group.getGroupId());
+                intent.putExtra("GROUP_NAME",group.getGroupName());
+                startActivity(intent);
+            }});
+
+
 
     }
     public void onAddOrganiserClicked(View view){
