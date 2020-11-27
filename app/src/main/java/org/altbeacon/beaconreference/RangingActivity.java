@@ -22,14 +22,12 @@ import org.altbeacon.beacon.Region;
 public class RangingActivity extends Activity implements BeaconConsumer{
     protected static final String TAG = "RangingActivity";
     static String beaconId;
-    static String beaconIncomingId;
     private BeaconManager beaconManager = BeaconManager.getInstanceForApplication(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         beaconId="0";
-        beaconIncomingId =getIntent().getStringExtra("beaconID");
         setContentView(R.layout.activity_ranging);
     }
 
@@ -53,18 +51,7 @@ public class RangingActivity extends Activity implements BeaconConsumer{
         beaconManager.bind(this);
     }
 public void onAttendanceClicked(View view){
-    TextView viewNameSurname;
-    EditText editNameSurname;
-    String putNameSurname;
-    System.out.println(beaconId+"HERE"+beaconIncomingId);
-    editNameSurname  = (EditText) findViewById(R.id.editText2);
-    viewNameSurname=(TextView) findViewById(R.id.textView2);
-    putNameSurname=editNameSurname.getText().toString();
-        if(beaconId.equals(beaconIncomingId)){
-            viewNameSurname.setText(putNameSurname);
-        }
-        else
-            viewNameSurname.setText("You are not");
+
 }
     @Override
     public void onBeaconServiceConnect() {

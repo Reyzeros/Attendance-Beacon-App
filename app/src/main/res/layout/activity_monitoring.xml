@@ -43,71 +43,16 @@
         android:layout_toRightOf="@id/Button01"
         android:text="Disable monitoring" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="153dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="127dp"
-        android:layout_marginStart="12dp"
-        android:text="Input your Beacon ID:" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignParentEnd="true"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="ID" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onIdInputClicked"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
-        android:text="Confirm" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:onClick="onOrganiserClicked"
-        android:text="Organiser" />
-
     <Button
         android:id="@+id/buttonAdminSetup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/enableButton"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="202dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="121dp"
         android:onClick="onAdminSetupClicked"
         android:text="Admin Setup" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="50dp"
-        android:text="Organiser Beacon ID:" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="69dp"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/button3" />
 
 
 </RelativeLayout>

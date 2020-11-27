@@ -168,23 +168,6 @@ public class MonitoringActivity extends Activity  {
 		}
 
 	}
-	public void onIdInputClicked(View view){
-		EditText editBeaconId;
-		editBeaconId  = (EditText) findViewById(R.id.editText);
-		beaconID=editBeaconId.getText().toString();
-		BackgroundTask b1= new BackgroundTask();
-		b1.execute(beaconID);
-
-}
-	public void onOrganiserClicked(View view){
-		TextView beaconIdIncoming;
-		DataReciver dr=new DataReciver();
-		dr.execute();
-		beaconID=dr.getMessage();
-		beaconIdIncoming=(TextView) findViewById(R.id.textView5);
-		beaconIdIncoming.setText(beaconID);
-		dr.cancel(true);
-	}
 
 
 
