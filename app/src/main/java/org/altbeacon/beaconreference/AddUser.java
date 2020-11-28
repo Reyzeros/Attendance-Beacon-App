@@ -10,16 +10,24 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddUser extends Activity {
     TextView textViewGroupName;
     EditText editTextUserName,editTextUserPassword;
     ListView listViewUsers;
     DatabaseReference databaseUsers;
+    List<User> users;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +43,31 @@ public class AddUser extends Activity {
         String name=getIntent().getStringExtra("GROUP_NAME");
         textViewGroupName.setText(name);
         databaseUsers= FirebaseDatabase.getInstance().getReference("users").child(id);
+        users=new ArrayList<>();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        databaseUsers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                users.clear();
+                for(DataSnapshot userSnapshot : snapshot.getChildren()){
+                    User user= userSnapshot.getValue(User.class);
+                    users.add(user);
+                }
+                UserList userListAdapter=new UserList(AddUser.this,users);
+                listViewUsers.setAdapter(userListAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     public void onAddUserClicked(View view){
         AddUser();
     }

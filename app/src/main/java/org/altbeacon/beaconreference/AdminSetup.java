@@ -29,7 +29,7 @@ public static final String GROUP_NAME="groupName";
 public static final String GROUP_ID="groupID";
     DatabaseReference databaseOrganisers;
     DatabaseReference databaseGroups;
-    EditText editTextOrganiserName, editTextBeaconID,editTextGroupName;
+    EditText editTextOrganiserName, editTextBeaconID,editTextGroupName,editTextOrganiserPassword;
     Button buttonAddOrganiser, buttonAddGroup;
     ListView listViewOrganisers;
     ListView listViewGroups;
@@ -52,6 +52,7 @@ public static final String GROUP_ID="groupID";
         listViewGroups=(ListView) findViewById(R.id.listViewGroups);
         buttonAddGroup=(Button) findViewById(R.id.buttonAddGroup);
         editTextGroupName=(EditText) findViewById(R.id.editTextGroupName);
+        editTextOrganiserPassword=(EditText) findViewById(R.id.editTextOrganiserPassword);
         listViewGroups.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -71,15 +72,16 @@ public static final String GROUP_ID="groupID";
 
     private void addOrganiser(){
         String organiserName=editTextOrganiserName.getText().toString().trim();
+        String organiserPassword=editTextOrganiserPassword.getText().toString().trim();
         String beaconId=editTextBeaconID.getText().toString().trim();
-        if(!TextUtils.isEmpty(organiserName)&&!TextUtils.isEmpty(beaconId)){
+        if(!TextUtils.isEmpty(organiserName)&&!TextUtils.isEmpty(beaconId)&&!TextUtils.isEmpty(organiserPassword)){
             String organiserId=databaseOrganisers.push().getKey();
-            Organiser organiser= new Organiser(organiserId,organiserName,beaconId);
+            Organiser organiser= new Organiser(organiserId,organiserName,organiserPassword,beaconId);
             databaseOrganisers.child(organiserId).setValue(organiser);
             Toast.makeText(this,"Organiser Added!", Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"Name and Id cannot be empty!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Name, Password and Id cannot be empty!", Toast.LENGTH_LONG).show();
         }
     }
     public void onAddGroupClicked(View view){
