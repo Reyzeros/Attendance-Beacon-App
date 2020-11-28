@@ -156,6 +156,10 @@ public class MonitoringActivity extends Activity  {
 		Intent myIntent = new Intent(this, AdminSetup.class);
 		this.startActivity(myIntent);
 	}
+	public void onOrganiserSetupClicked(View view){
+		Intent myIntent = new Intent(this, OrganiserSetup.class);
+		this.startActivity(myIntent);
+	}
 	public void onEnableClicked(View view) {
 		BeaconApplication application = ((BeaconApplication) this.getApplicationContext());
 		if (BeaconManager.getInstanceForApplication(this).getMonitoredRegions().size() > 0) {

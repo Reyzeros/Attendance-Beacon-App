@@ -34,6 +34,10 @@
             android:name="AddUser"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".OrganiserSetup"
+            android:label="@string/app_name" >
+        </activity>
         <!-- uncomment the following to enable scanning for over 30 minutes on Android 7+ -->
         <service android:name="org.altbeacon.beacon.service.BeaconService"
             tools:node="replace">
