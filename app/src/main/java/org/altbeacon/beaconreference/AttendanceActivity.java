@@ -2,17 +2,18 @@ package org.altbeacon.beaconreference;
 
 public class AttendanceActivity {
     String activityId;
-    String activityRelation;
     String activityDate;
+    Boolean activityIsChecking;
 
     public AttendanceActivity(){
 
     }
 
-    public AttendanceActivity(String activityId, String activityRelation, String activityDate) {
+    public AttendanceActivity(String activityId, String activityDate) {
         this.activityId = activityId;
-        this.activityRelation = activityRelation;
+      //  this.activityRelation = activityRelation;
         this.activityDate = activityDate;
+        this.activityIsChecking=false;
     }
 
     public String getActivityId() {
@@ -23,13 +24,6 @@ public class AttendanceActivity {
         this.activityId = activityId;
     }
 
-    public String getActivityRelation() {
-        return activityRelation;
-    }
-
-    public void setActivityRelation(String activityRelation) {
-        this.activityRelation = activityRelation;
-    }
 
     public String getActivityDate() {
         return activityDate;
@@ -37,5 +31,13 @@ public class AttendanceActivity {
 
     public void setActivityDate(String activityDate) {
         this.activityDate = activityDate;
+    }
+
+    public Boolean getActivityIsChecking() {
+        return activityIsChecking;
+    }
+
+    public void setActivityIsChecking(Boolean activityIsChecking) {
+        this.activityIsChecking = activityIsChecking;
     }
 }
