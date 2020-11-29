@@ -32,7 +32,7 @@ public class OrganiserSetup extends Activity {
     ListView listViewGroups,listViewAttendanceActivity;
     List<Group> groupList;
     List<AttendanceActivity> activityList;
-    String temporaryOrganiserId, temporaryOrganiserName, groupId,attendanceId,attendanceDate;
+    String temporaryOrganiserId, temporaryOrganiserName, groupId ,groupName,attendanceId,attendanceDate;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +62,7 @@ public class OrganiserSetup extends Activity {
                 Group group = groupList.get(i);
                 textViewGroupChoice.setText(group.getGroupName());
                 groupId=group.getGroupId();
+                groupName=group.getGroupName();
                 databaseActivity=FirebaseDatabase.getInstance().getReference("AttendanceActivity").child(groupId).child(temporaryOrganiserId);
                 databaseActivity.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -103,6 +104,15 @@ public class OrganiserSetup extends Activity {
     }
     public void onButtonStopAttendanceClicked(View view){
         stopAttendance();
+    }
+    public  void onButtonResultsClicked(View view){
+        Intent intent=new Intent(getApplicationContext(),AttendanceDisplay.class);
+        intent.putExtra("GROUP_ID",groupId);
+        intent.putExtra("GROUP_NAME",groupName);
+        intent.putExtra("ATTENDANCE_ID",attendanceId);
+        intent.putExtra("ATTENDANCE_DATE",attendanceDate);
+        intent.putExtra("ORGANISER_ID",temporaryOrganiserId);
+        startActivity(intent);
     }
 
     private void addDate() {

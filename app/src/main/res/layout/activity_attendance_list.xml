@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AttendanceDisplay" >
+
+
+    <ListView
+        android:id="@+id/ListViewPresentPeople"
+        android:layout_width="355dp"
+        android:layout_height="568dp"
+        android:layout_below="@+id/textViewGroupNameAttendance"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="40dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="38dp"
+        android:text="List of Present People:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/textViewDateAttendance"
+        android:layout_width="186dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="30dp"
+        android:layout_toEndOf="@+id/textViewGroupNameAttendance" />
+
+    <TextView
+        android:id="@+id/textViewGroupNameAttendance"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="29dp" />
+</RelativeLayout>

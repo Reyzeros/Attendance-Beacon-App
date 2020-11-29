@@ -1,8 +1,11 @@
 package org.altbeacon.beaconreference;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.app.Activity;
 
@@ -50,6 +53,7 @@ public class RangingActivity extends Activity implements BeaconConsumer{
     String chosenActivityId, chosenActivityDate;
     boolean isChecking;
     boolean isChosen;
+    int posI;
 
     private BeaconManager beaconManager = BeaconManager.getInstanceForApplication(this);
 
@@ -103,10 +107,18 @@ public class RangingActivity extends Activity implements BeaconConsumer{
            @Override
            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                AttendanceActivity attendanceActivity = activityList.get(i);
+               posI=i;
                chosenActivityId = attendanceActivity.getActivityId();
                chosenActivityDate = attendanceActivity.getActivityDate();
                isChecking=attendanceActivity.getActivityIsChecking();
                textViewDateUser.setText(chosenActivityDate);
+               new Timer().schedule(new TimerTask() {
+                   @Override
+                   public void run() {
+                      AttendanceActivity attendanceActivity=activityList.get(posI);
+                       isChecking=attendanceActivity.getActivityIsChecking();
+                   }
+               },0,100);
            }
        });
     }
@@ -118,7 +130,7 @@ public class RangingActivity extends Activity implements BeaconConsumer{
         if(!TextUtils.isEmpty(chosenOrganiserId)&&!TextUtils.isEmpty(chosenActivityId)) {
             if (TextUtils.equals(chosenOrganiserBeaconId, beaconId)) {
                 if (isChecking) {
-                    datebaseActivity = FirebaseDatabase.getInstance().getReference("AttendanceActivity").child(temporaryGroupId).child(chosenOrganiserId).child(chosenActivityId);
+                    datebaseActivity = FirebaseDatabase.getInstance().getReference("AttendanceActivity").child(temporaryGroupId).child(chosenOrganiserId).child(chosenActivityId).child(temporaryUserId);
                     String isPresentId = datebaseActivity.push().getKey();
                     IsPresent isPresent = new IsPresent(isPresentId, temporaryUserId);
                     datebaseActivity.child(isPresentId).setValue(isPresent);
