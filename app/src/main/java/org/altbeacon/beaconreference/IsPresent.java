@@ -3,14 +3,16 @@ package org.altbeacon.beaconreference;
 public class IsPresent {
     String isPresentId;
     String userId;
+    String userName;
 
     public IsPresent(){
 
     }
 
-    public IsPresent(String isPresentId, String userId) {
+    public IsPresent(String isPresentId, String userId, String userName) {
         this.isPresentId = isPresentId;
         this.userId = userId;
+        this.userName=userName;
     }
 
     public String getIsPresentId() {
@@ -27,5 +29,13 @@ public class IsPresent {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

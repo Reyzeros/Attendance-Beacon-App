@@ -2,6 +2,7 @@ package org.altbeacon.beaconreference;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,11 +15,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
+
 public class AttendanceDisplay extends Activity {
     ListView listViewAttendance;
     TextView textViewGroupNameAttendance,textViewDateAttendance;
     String groupId,groupName,attendanceId,attendanceDate,organiserId;
-    DatabaseReference databaseActivity,databaseUsers;
+    DatabaseReference databaseActivity;
+    List<IsPresent> isPresents;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,27 +37,26 @@ public class AttendanceDisplay extends Activity {
         attendanceId=getIntent().getStringExtra("ATTENDANCE_ID");
         attendanceDate=getIntent().getStringExtra("ATTENDANCE_DATE");
         organiserId=getIntent().getStringExtra("ORGANISER_ID");
-
+        isPresents=new ArrayList<>();
         textViewGroupNameAttendance.setText(groupName);
         textViewDateAttendance.setText(attendanceDate);
-        databaseActivity= FirebaseDatabase.getInstance().getReference("AttendanceActivity").child(groupId).child(organiserId).child(attendanceId);
-        databaseUsers=FirebaseDatabase.getInstance().getReference("users").child(groupId);
+        databaseActivity= FirebaseDatabase.getInstance().getReference("AttendanceActivityUser").child(groupId).child(organiserId).child(attendanceId);
     }
 
-/**
+
     @Override
     protected void onStart() {
         super.onStart();
-        databaseUsers.addValueEventListener(new ValueEventListener() {
+        databaseActivity.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                users.clear();
-                for(DataSnapshot userSnapshot : snapshot.getChildren()){
-                    User user= userSnapshot.getValue(User.class);
-                    users.add(user);
+                isPresents.clear();
+                for(DataSnapshot isPresentSnapshot : snapshot.getChildren()){
+                    IsPresent isPresent= isPresentSnapshot.getValue(IsPresent.class);
+                    isPresents.add(isPresent);
                 }
-                UserList userListAdapter=new UserList(AddUser.this,users);
-                listViewUsers.setAdapter(userListAdapter);
+                IsPresentList isPresentList=new IsPresentList(AttendanceDisplay.this,isPresents);
+                listViewAttendance.setAdapter(isPresentList);
             }
 
             @Override
@@ -59,6 +64,7 @@ public class AttendanceDisplay extends Activity {
 
             }
         });
+
     }
-    */
+
 }

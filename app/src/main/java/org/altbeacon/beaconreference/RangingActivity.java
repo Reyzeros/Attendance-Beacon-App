@@ -48,7 +48,7 @@ public class RangingActivity extends Activity implements BeaconConsumer{
     Button buttonConfirm;
     DatabaseReference databaseOrganisers,databaseDates, datebaseActivity;
     String temporaryGroupId;
-    String temporaryUserId;
+    String temporaryUserId, temporaryUserName;
     String chosenOrganiserId,chosenOrganiserName,chosenOrganiserBeaconId;
     String chosenActivityId, chosenActivityDate;
     boolean isChecking;
@@ -75,6 +75,7 @@ public class RangingActivity extends Activity implements BeaconConsumer{
         organiserList=new ArrayList<>();
         temporaryGroupId="-MN8f6i3wnaLRvoi3ffg";
         temporaryUserId="-MN9B1eLCkcpnOlMcema";
+        temporaryUserName="Julia Kowalska";
         databaseOrganisers=FirebaseDatabase.getInstance().getReference("Organisers");
         listViewOrganisers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -130,9 +131,9 @@ public class RangingActivity extends Activity implements BeaconConsumer{
         if(!TextUtils.isEmpty(chosenOrganiserId)&&!TextUtils.isEmpty(chosenActivityId)) {
             if (TextUtils.equals(chosenOrganiserBeaconId, beaconId)) {
                 if (isChecking) {
-                    datebaseActivity = FirebaseDatabase.getInstance().getReference("AttendanceActivity").child(temporaryGroupId).child(chosenOrganiserId).child(chosenActivityId).child(temporaryUserId);
+                    datebaseActivity = FirebaseDatabase.getInstance().getReference("AttendanceActivityUser").child(temporaryGroupId).child(chosenOrganiserId).child(chosenActivityId);
                     String isPresentId = datebaseActivity.push().getKey();
-                    IsPresent isPresent = new IsPresent(isPresentId, temporaryUserId);
+                    IsPresent isPresent = new IsPresent(isPresentId, temporaryUserId,temporaryUserName);
                     datebaseActivity.child(isPresentId).setValue(isPresent);
                     Toast.makeText(this, "You are Present!", Toast.LENGTH_LONG).show();
                 } else {
