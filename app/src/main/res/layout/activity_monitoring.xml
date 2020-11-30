@@ -16,12 +16,14 @@
         android:id="@+id/monitoringText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView1"
-        android:layout_marginTop="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
         android:gravity="left|top"
-        android:inputType="textMultiLine" >
+        android:inputType="textMultiLine">
+
         <requestFocus />
     </EditText>
 
@@ -29,8 +31,10 @@
         android:id="@+id/Button01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewInvalid"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/monitoringText"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="36dp"
         android:onClick="onRangingClicked"
         android:text="Attendance check" />
 
@@ -38,18 +42,20 @@
         android:id="@+id/enableButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onEnableClicked"
         android:layout_below="@+id/monitoringText"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="0dp"
         android:layout_toRightOf="@id/Button01"
+        android:onClick="onEnableClicked"
         android:text="Disable monitoring" />
 
     <Button
         android:id="@+id/buttonAdminSetup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/enableButton"
+        android:layout_below="@+id/Button01"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="141dp"
+        android:layout_marginStart="61dp"
         android:layout_marginTop="28dp"
         android:onClick="onAdminSetupClicked"
         android:text="Admin Setup" />
@@ -58,12 +64,131 @@
         android:id="@+id/buttonOrganiserSetup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonAdminSetup"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="129dp"
-        android:layout_marginTop="21dp"
+        android:layout_below="@+id/buttonLogin"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="98dp"
+        android:layout_toEndOf="@+id/buttonAdminSetup"
         android:onClick="onOrganiserSetupClicked"
         android:text="Organiser Setup" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/monitoringText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="43dp"
+        android:text="Log in:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:text="as:" />
+
+    <RadioButton
+        android:id="@+id/radioButtonUserLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="13dp"
+        android:layout_toEndOf="@+id/textView15"
+        android:onClick="onRadioButtonUserLoginClicked"
+        android:text="User" />
+
+    <RadioButton
+        android:id="@+id/radioButtonOrganiserLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/radioButtonUserLogin"
+        android:onClick="onRadioButtonOrganiserLoginClicked"
+        android:text="Organiser" />
+
+    <RadioButton
+        android:id="@+id/radioButtonAdminLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_toEndOf="@+id/radioButtonOrganiserLogin"
+        android:onClick="onRadioButtonAdminLoginClicked"
+        android:text="Admin" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="29dp"
+        android:text="Name and Surname:" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView16"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="27dp"
+        android:text="Password:" />
+
+    <EditText
+        android:id="@+id/editTextTextNameLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioButtonUserLogin"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="19dp"
+        android:layout_toEndOf="@+id/textView16"
+        android:ems="10"
+        android:hint="Name and Surname"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextTextPasswordLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTextNameLogin"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/textView17"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextTextPasswordLogin"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="14dp"
+        android:layout_toEndOf="@+id/textViewInvalid"
+        android:onClick="onButtonLoginClicked"
+        android:text="Login" />
+
+    <TextView
+        android:id="@+id/textViewInvalid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView17"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="38dp"
+        android:text="Invalid Name or Password" />
 
 
 </RelativeLayout>

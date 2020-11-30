@@ -9,11 +9,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconManager;
@@ -29,13 +32,32 @@ public class MonitoringActivity extends Activity  {
 	private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
 	private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
 	public String beaconID="defaultID";
+	TextView textViewInvalid;
+	EditText editTextTextNameLogin,editTextTextPasswordLogin;
+	RadioButton radioButtonUserLogin, radioButtonOrganiserLogin, radioButtonAdminLogin;
+	Button buttonLogin;
+	int choice;
+	private String login,password;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		Log.d(TAG, "onCreate");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_monitoring);
+
+		textViewInvalid=(TextView) findViewById(R.id.textViewInvalid);
+		editTextTextNameLogin=(EditText) findViewById(R.id.editTextTextNameLogin);
+		editTextTextPasswordLogin=(EditText) findViewById(R.id.editTextTextPasswordLogin);
+		radioButtonUserLogin=(RadioButton) findViewById(R.id.radioButtonUserLogin);
+		radioButtonOrganiserLogin=(RadioButton) findViewById(R.id.radioButtonOrganiserLogin);
+		radioButtonAdminLogin=(RadioButton) findViewById(R.id.radioButtonAdminLogin);
+		buttonLogin=(Button) findViewById(R.id.buttonLogin);
+		radioButtonUserLogin.setChecked(true);
+		choice=1;
+		login="";
+		password="";
 		verifyBluetooth();
+
 
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -172,7 +194,36 @@ public class MonitoringActivity extends Activity  {
 		}
 
 	}
+	public void onRadioButtonUserLoginClicked(View view){
+		radioButtonOrganiserLogin.setChecked(false);
+		radioButtonAdminLogin.setChecked(false);
+		choice=1;
 
+	}
+	public void onRadioButtonOrganiserLoginClicked(View view){
+		radioButtonUserLogin.setChecked(false);
+		radioButtonAdminLogin.setChecked(false);
+		choice=2;
+	}
+	public void onRadioButtonAdminLoginClicked(View view){
+		radioButtonOrganiserLogin.setChecked(false);
+		radioButtonUserLogin.setChecked(false);
+		choice=3;
+	}
+	public void onButtonLoginClicked(View view){
+		loginTo();
+	}
+
+
+
+	private void loginTo(){
+		if(!TextUtils.isEmpty(login)&&!TextUtils.isEmpty(password)){
+
+		}
+		else {
+			Toast.makeText(this, "Name and Password cannot be empty!", Toast.LENGTH_LONG).show();
+		}
+	}
 
 
     @Override
