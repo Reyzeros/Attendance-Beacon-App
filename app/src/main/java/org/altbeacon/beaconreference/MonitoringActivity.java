@@ -14,9 +14,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconManager;
@@ -36,8 +44,10 @@ public class MonitoringActivity extends Activity  {
 	EditText editTextTextNameLogin,editTextTextPasswordLogin;
 	RadioButton radioButtonUserLogin, radioButtonOrganiserLogin, radioButtonAdminLogin;
 	Button buttonLogin;
+	ProgressBar progressBar;
 	int choice;
-	private String login,password;
+	private String email,password;
+	FirebaseAuth fAuth;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +55,8 @@ public class MonitoringActivity extends Activity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_monitoring);
 
-		textViewInvalid=(TextView) findViewById(R.id.textViewInvalid);
+		progressBar=(ProgressBar) findViewById(R.id.progressBar2);
+		progressBar.setVisibility(View.INVISIBLE);
 		editTextTextNameLogin=(EditText) findViewById(R.id.editTextTextNameLogin);
 		editTextTextPasswordLogin=(EditText) findViewById(R.id.editTextTextPasswordLogin);
 		radioButtonUserLogin=(RadioButton) findViewById(R.id.radioButtonUserLogin);
@@ -53,8 +64,9 @@ public class MonitoringActivity extends Activity  {
 		radioButtonAdminLogin=(RadioButton) findViewById(R.id.radioButtonAdminLogin);
 		buttonLogin=(Button) findViewById(R.id.buttonLogin);
 		radioButtonUserLogin.setChecked(true);
+		fAuth= FirebaseAuth.getInstance();
 		choice=1;
-		login="";
+		email="";
 		password="";
 		verifyBluetooth();
 
@@ -217,10 +229,32 @@ public class MonitoringActivity extends Activity  {
 
 
 	private void loginTo(){
-		if(!TextUtils.isEmpty(login)&&!TextUtils.isEmpty(password)){
+		progressBar.setVisibility(View.VISIBLE);
+		email=editTextTextNameLogin.getText().toString().trim();
+		password=editTextTextPasswordLogin.getText().toString().trim();
 
+		if(!TextUtils.isEmpty(email)&&!TextUtils.isEmpty(password)&&password.length()>=6){
+fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+	@Override
+	public void onComplete(@NonNull Task<AuthResult> task) {
+		if(task.isSuccessful()){
+			progressBar.setVisibility(View.INVISIBLE);
+			Toast.makeText(MonitoringActivity.this,"Logged in Successfully!", Toast.LENGTH_LONG).show();
+			String userId=fAuth.getCurrentUser().getUid();
+			Intent myIntent = new Intent(MonitoringActivity.this, RangingActivity.class);
+			myIntent.putExtra("USER_ID",userId);
+			MonitoringActivity.this.startActivity(myIntent);
+		}
+		else{
+			progressBar.setVisibility(View.INVISIBLE);
+			Toast.makeText(MonitoringActivity.this,"Error"+task.getException().getMessage(), Toast.LENGTH_LONG).show();
+		}
+
+	}
+});
 		}
 		else {
+			progressBar.setVisibility(View.INVISIBLE);
 			Toast.makeText(this, "Name and Password cannot be empty!", Toast.LENGTH_LONG).show();
 		}
 	}

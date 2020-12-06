@@ -3,16 +3,18 @@ package org.altbeacon.beaconreference;
 public class User {
    private String userId;
     private String userName;
-   private String userPassword;
+   private String userEmail;
+    private String  groupId;
 
    public User(){
 
    }
 
-    public User(String userId,String userName, String userPassword) {
+    public User(String userId,String userName, String userEmail,String groupId) {
         this.userId = userId;
         this.userName=userName;
-        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.groupId=groupId;
     }
 
     public String getUserId() {
@@ -23,12 +25,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getUserName() {
@@ -37,5 +39,13 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 }

@@ -24,10 +24,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.altbeacon.beacon.AltBeacon;
@@ -54,6 +56,7 @@ public class RangingActivity extends Activity implements BeaconConsumer{
     boolean isChecking;
     boolean isChosen;
     int posI;
+    FirebaseAuth fAuth;
 
     private BeaconManager beaconManager = BeaconManager.getInstanceForApplication(this);
 
@@ -69,13 +72,34 @@ public class RangingActivity extends Activity implements BeaconConsumer{
         textViewOrganiserUser=(TextView) findViewById(R.id.textViewOrganiserUser);
         listViewAttendanceActivity=(ListView) findViewById(R.id.listViewDateUser);
         listViewOrganisers=(ListView) findViewById(R.id.listViewOrganisersUser);
+        fAuth=FirebaseAuth.getInstance();
 
         buttonConfirm=(Button) findViewById(R.id.buttonConfirmAttendance);
         activityList=new ArrayList<>();
         organiserList=new ArrayList<>();
-        temporaryGroupId="-MN8f6i3wnaLRvoi3ffg";
-        temporaryUserId="-MN9B1eLCkcpnOlMcema";
-        temporaryUserName="Julia Kowalska";
+        temporaryGroupId="";
+        temporaryUserId="";
+        temporaryUserName="";
+        temporaryUserId= getIntent().getStringExtra("USER_ID");
+        Query query=FirebaseDatabase.getInstance().getReference("Users").orderByChild("userId").equalTo(temporaryUserId);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot datasnapshot:snapshot.getChildren()) {
+                        User user = datasnapshot.getValue(User.class);
+                        temporaryGroupId = user.getGroupId();
+                        temporaryUserName = user.getUserName();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         databaseOrganisers=FirebaseDatabase.getInstance().getReference("Organisers");
         listViewOrganisers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -153,6 +177,7 @@ public class RangingActivity extends Activity implements BeaconConsumer{
     @Override 
     protected void onDestroy() {
         beaconId="0";
+        fAuth.signOut();
         super.onDestroy();
     }
 

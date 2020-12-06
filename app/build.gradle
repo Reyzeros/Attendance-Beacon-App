@@ -24,4 +24,5 @@ dependencies {
     //implementation project(':android-beacon-library:lib')
     implementation 'org.altbeacon:android-beacon-library:2+'
     implementation 'com.google.firebase:firebase-database:19.5.1'
+    implementation 'com.google.firebase:firebase-auth:20.0.1'
 }
