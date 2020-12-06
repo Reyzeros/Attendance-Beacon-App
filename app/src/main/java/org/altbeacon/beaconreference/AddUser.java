@@ -102,7 +102,6 @@ public class AddUser extends Activity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                           String userId=fAuth.getCurrentUser().getUid();
-                          System.out.println(userId+"TO TU");
                         progressBar.setVisibility(View.INVISIBLE);
                         User user=new User(userId,userName,userEmail,groupId);
                         databaseUsers.child(userId).setValue(user);

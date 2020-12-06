@@ -10,11 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,12 +34,15 @@ public static final String GROUP_NAME="groupName";
 public static final String GROUP_ID="groupID";
     DatabaseReference databaseOrganisers;
     DatabaseReference databaseGroups;
-    EditText editTextOrganiserName, editTextBeaconID,editTextGroupName,editTextOrganiserPassword;
+    FirebaseAuth fAuth;
+    EditText editTextOrganiserName, editTextBeaconID,editTextGroupName,editTextOrganiserPassword,editTextOrganiserEmail ;
     Button buttonAddOrganiser, buttonAddGroup;
     ListView listViewOrganisers;
     ListView listViewGroups;
     List<Organiser> organiserList;
     List<Group> groupList;
+    ProgressBar progressBar;
+    private String organiserEmail,organiserPassword,organiserName,beaconId;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,9 +50,12 @@ public static final String GROUP_ID="groupID";
 
         databaseOrganisers= FirebaseDatabase.getInstance().getReference("Organisers");
         databaseGroups=FirebaseDatabase.getInstance().getReference("Groups");
-
+        fAuth=FirebaseAuth.getInstance();
+        progressBar=(ProgressBar) findViewById(R.id.progressBar3);
+        progressBar.setVisibility(View.INVISIBLE);
         editTextOrganiserName=(EditText) findViewById(R.id.editTextOrganiserName);
         editTextBeaconID=(EditText) findViewById(R.id.editTextOrganiserBeaconId);
+        editTextOrganiserEmail=(EditText) findViewById(R.id.editTextOrganiserEmail);
         organiserList=new ArrayList<>();
         groupList=new ArrayList<>();
         buttonAddOrganiser=(Button) findViewById(R.id.buttonAddOrganiser);
@@ -71,17 +82,33 @@ public static final String GROUP_ID="groupID";
     }
 
     private void addOrganiser(){
-        String organiserName=editTextOrganiserName.getText().toString().trim();
-        String organiserPassword=editTextOrganiserPassword.getText().toString().trim();
-        String beaconId=editTextBeaconID.getText().toString().trim();
-        if(!TextUtils.isEmpty(organiserName)&&!TextUtils.isEmpty(beaconId)&&!TextUtils.isEmpty(organiserPassword)){
-            String organiserId=databaseOrganisers.push().getKey();
-            Organiser organiser= new Organiser(organiserId,organiserName,organiserPassword,beaconId);
-            databaseOrganisers.child(organiserId).setValue(organiser);
-            Toast.makeText(this,"Organiser Added!", Toast.LENGTH_LONG).show();
+        progressBar.setVisibility(View.VISIBLE);
+         organiserName=editTextOrganiserName.getText().toString().trim();
+         organiserEmail=editTextOrganiserEmail.getText().toString().trim();
+         organiserPassword=editTextOrganiserPassword.getText().toString().trim();
+         beaconId=editTextBeaconID.getText().toString().trim();
+        if(!TextUtils.isEmpty(organiserName)&&!TextUtils.isEmpty(beaconId)&&!TextUtils.isEmpty(organiserPassword)&&organiserPassword.length()>=6&&!TextUtils.isEmpty(organiserEmail)){
+            fAuth.createUserWithEmailAndPassword(organiserEmail,organiserPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                                                                             @Override
+                                                                                                             public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                                                                 if(task.isSuccessful()){
+                                                                                                                     progressBar.setVisibility(View.INVISIBLE);
+                                                                                                                     String organiserId=fAuth.getCurrentUser().getUid();
+                                                                                                                     Organiser organiser= new Organiser(organiserId,organiserName, organiserEmail, organiserPassword,beaconId);
+                                                                                                                     databaseOrganisers.child(organiserId).setValue(organiser);
+                                                                                                                     Toast.makeText(AdminSetup.this,"Organiser Added!", Toast.LENGTH_LONG).show();
+                                                                                                                     fAuth.signOut();
+                                                                                                                 }
+                                                                                                                 else {
+                                                                                                                     progressBar.setVisibility(View.INVISIBLE);
+                                                                                                                 }
+                                                                                                             }
+                                                                                                         });
+
         }
         else{
-            Toast.makeText(this,"Name, Password and Id cannot be empty!", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.INVISIBLE);
+            Toast.makeText(this,"Name, Email, Password and Id cannot be empty!", Toast.LENGTH_LONG).show();
         }
     }
     public void onAddGroupClicked(View view){

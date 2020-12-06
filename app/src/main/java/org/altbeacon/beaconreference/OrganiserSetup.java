@@ -15,10 +15,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -33,14 +35,34 @@ public class OrganiserSetup extends Activity {
     List<Group> groupList;
     List<AttendanceActivity> activityList;
     String temporaryOrganiserId, temporaryOrganiserName, groupId ,groupName,attendanceId,attendanceDate;
+    FirebaseAuth fAuth;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organiser_setup);
 
-        temporaryOrganiserId="-MNE5SA2KIGi9EOnmgji";
-        temporaryOrganiserName="Patryk Wyczesany";
+        temporaryOrganiserId="";
+        temporaryOrganiserName="";
+        temporaryOrganiserId=getIntent().getStringExtra("USER_ID");
+        fAuth=FirebaseAuth.getInstance();
+        Query query=FirebaseDatabase.getInstance().getReference("Organisers").orderByChild("organiserId").equalTo(temporaryOrganiserId);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot datasnapshot:snapshot.getChildren()) {
+                        Organiser organiser = datasnapshot.getValue(Organiser.class);
+                        temporaryOrganiserName = organiser.getOrganiserName();
+                        textViewSetupOrganiserName.setText(temporaryOrganiserName);
+                    }
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         groupId="";
         attendanceId="";
         databaseGroups= FirebaseDatabase.getInstance().getReference("Groups");
@@ -92,7 +114,7 @@ public class OrganiserSetup extends Activity {
                                                                   textViewDateShown.setText(attendanceDate);
                                                               }
                                                           });
-        textViewSetupOrganiserName.setText(temporaryOrganiserName);
+
     }
 
 
@@ -180,6 +202,9 @@ public class OrganiserSetup extends Activity {
 
     }
 
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        fAuth.signOut();
+    }
 }

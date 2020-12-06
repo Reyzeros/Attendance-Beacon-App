@@ -25,6 +25,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconManager;
@@ -32,6 +37,7 @@ import org.altbeacon.beacon.Region;
 
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.SQLOutput;
 import java.util.Collection;
 
 
@@ -39,15 +45,13 @@ public class MonitoringActivity extends Activity  {
 	protected static final String TAG = "MonitoringActivity";
 	private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
 	private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
-	public String beaconID="defaultID";
-	TextView textViewInvalid;
 	EditText editTextTextNameLogin,editTextTextPasswordLogin;
-	RadioButton radioButtonUserLogin, radioButtonOrganiserLogin, radioButtonAdminLogin;
 	Button buttonLogin;
 	ProgressBar progressBar;
 	int choice;
 	private String email,password;
 	FirebaseAuth fAuth;
+	private String userId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +63,7 @@ public class MonitoringActivity extends Activity  {
 		progressBar.setVisibility(View.INVISIBLE);
 		editTextTextNameLogin=(EditText) findViewById(R.id.editTextTextNameLogin);
 		editTextTextPasswordLogin=(EditText) findViewById(R.id.editTextTextPasswordLogin);
-		radioButtonUserLogin=(RadioButton) findViewById(R.id.radioButtonUserLogin);
-		radioButtonOrganiserLogin=(RadioButton) findViewById(R.id.radioButtonOrganiserLogin);
-		radioButtonAdminLogin=(RadioButton) findViewById(R.id.radioButtonAdminLogin);
 		buttonLogin=(Button) findViewById(R.id.buttonLogin);
-		radioButtonUserLogin.setChecked(true);
 		fAuth= FirebaseAuth.getInstance();
 		choice=1;
 		email="";
@@ -181,17 +181,8 @@ public class MonitoringActivity extends Activity  {
 		}
 	}
 
-	public void onRangingClicked(View view) {
-		Intent myIntent = new Intent(this, RangingActivity.class);
-		myIntent.putExtra("beaconID",beaconID);
-		this.startActivity(myIntent);
-	}
 	public void onAdminSetupClicked(View view){
 		Intent myIntent = new Intent(this, AdminSetup.class);
-		this.startActivity(myIntent);
-	}
-	public void onOrganiserSetupClicked(View view){
-		Intent myIntent = new Intent(this, OrganiserSetup.class);
 		this.startActivity(myIntent);
 	}
 	public void onEnableClicked(View view) {
@@ -206,22 +197,7 @@ public class MonitoringActivity extends Activity  {
 		}
 
 	}
-	public void onRadioButtonUserLoginClicked(View view){
-		radioButtonOrganiserLogin.setChecked(false);
-		radioButtonAdminLogin.setChecked(false);
-		choice=1;
 
-	}
-	public void onRadioButtonOrganiserLoginClicked(View view){
-		radioButtonUserLogin.setChecked(false);
-		radioButtonAdminLogin.setChecked(false);
-		choice=2;
-	}
-	public void onRadioButtonAdminLoginClicked(View view){
-		radioButtonOrganiserLogin.setChecked(false);
-		radioButtonUserLogin.setChecked(false);
-		choice=3;
-	}
 	public void onButtonLoginClicked(View view){
 		loginTo();
 	}
@@ -238,12 +214,36 @@ fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCom
 	@Override
 	public void onComplete(@NonNull Task<AuthResult> task) {
 		if(task.isSuccessful()){
-			progressBar.setVisibility(View.INVISIBLE);
 			Toast.makeText(MonitoringActivity.this,"Logged in Successfully!", Toast.LENGTH_LONG).show();
-			String userId=fAuth.getCurrentUser().getUid();
-			Intent myIntent = new Intent(MonitoringActivity.this, RangingActivity.class);
-			myIntent.putExtra("USER_ID",userId);
-			MonitoringActivity.this.startActivity(myIntent);
+			userId=fAuth.getCurrentUser().getUid();
+
+			Query query= FirebaseDatabase.getInstance().getReference("Users").orderByChild("userId").equalTo(userId);
+			query.addValueEventListener(new ValueEventListener() {
+				@Override
+				public void onDataChange(@NonNull DataSnapshot snapshot) {
+					if(snapshot.exists()){
+						choice=1;
+						progressBar.setVisibility(View.INVISIBLE);
+						Intent myIntent = new Intent(MonitoringActivity.this, RangingActivity.class);
+						myIntent.putExtra("USER_ID", userId);
+						MonitoringActivity.this.startActivity(myIntent);
+					}
+					else{
+						choice=2;
+						progressBar.setVisibility(View.INVISIBLE);
+						Intent myIntent = new Intent(MonitoringActivity.this, OrganiserSetup.class);
+						myIntent.putExtra("USER_ID", userId);
+						MonitoringActivity.this.startActivity(myIntent);
+					}
+				}
+
+				@Override
+				public void onCancelled(@NonNull DatabaseError error) {
+
+				}
+			});
+
+
 		}
 		else{
 			progressBar.setVisibility(View.INVISIBLE);

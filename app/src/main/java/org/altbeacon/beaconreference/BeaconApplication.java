@@ -53,7 +53,7 @@ public class BeaconApplication extends Application implements BootstrapNotifier 
         // communicate to users that your app is using resources in the background.
         //
 
-
+/*
         Notification.Builder builder = new Notification.Builder(this);
         builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setContentTitle("Scanning for Beacons");
@@ -72,7 +72,7 @@ public class BeaconApplication extends Application implements BootstrapNotifier 
             builder.setChannelId(channel.getId());
         }
         beaconManager.enableForegroundServiceScanning(builder.build(), 456);
-
+*/
         // For the above foreground scanning service to be useful, you need to disable
         // JobScheduler-based scans (used on Android 8+) and set a fast background scan
         // cycle that would otherwise be disallowed by the operating system.

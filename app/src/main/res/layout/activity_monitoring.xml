@@ -28,24 +28,14 @@
     </EditText>
 
     <Button
-        android:id="@+id/Button01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/progressBar2"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="31dp"
-        android:onClick="onRangingClicked"
-        android:text="Attendance check" />
-
-    <Button
         android:id="@+id/enableButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/monitoringText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="0dp"
-        android:layout_toRightOf="@id/Button01"
         android:onClick="onEnableClicked"
         android:text="Disable monitoring" />
 
@@ -53,23 +43,12 @@
         android:id="@+id/buttonAdminSetup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Button01"
+        android:layout_below="@+id/progressBar2"
         android:layout_alignParentStart="true"
         android:layout_marginStart="61dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="100dp"
         android:onClick="onAdminSetupClicked"
         android:text="Admin Setup" />
-
-    <Button
-        android:id="@+id/buttonOrganiserSetup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonLogin"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="101dp"
-        android:layout_toEndOf="@+id/buttonAdminSetup"
-        android:onClick="onOrganiserSetupClicked"
-        android:text="Organiser Setup" />
 
     <TextView
         android:id="@+id/textView3"
@@ -77,62 +56,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/monitoringText"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="43dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="64dp"
         android:text="Log in:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="24dp"
-        android:text="as:" />
-
-    <RadioButton
-        android:id="@+id/radioButtonUserLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="13dp"
-        android:layout_toEndOf="@+id/textView15"
-        android:onClick="onRadioButtonUserLoginClicked"
-        android:text="User" />
-
-    <RadioButton
-        android:id="@+id/radioButtonOrganiserLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="11dp"
-        android:layout_toEndOf="@+id/radioButtonUserLogin"
-        android:onClick="onRadioButtonOrganiserLoginClicked"
-        android:text="Organiser" />
-
-    <RadioButton
-        android:id="@+id/radioButtonAdminLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="11dp"
-        android:layout_toEndOf="@+id/radioButtonOrganiserLogin"
-        android:onClick="onRadioButtonAdminLoginClicked"
-        android:text="Admin" />
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView15"
+        android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="25dp"
         android:text="Email:" />
 
     <TextView
@@ -149,9 +85,9 @@
         android:id="@+id/editTextTextNameLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/radioButtonUserLogin"
-        android:layout_marginStart="106dp"
-        android:layout_marginTop="21dp"
+        android:layout_below="@+id/textView3"
+        android:layout_marginStart="103dp"
+        android:layout_marginTop="22dp"
         android:layout_toEndOf="@+id/textView16"
         android:ems="10"
         android:hint="Email"
