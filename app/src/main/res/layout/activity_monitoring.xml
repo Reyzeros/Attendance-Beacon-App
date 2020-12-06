@@ -2,42 +2,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MonitoringActivity" >
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="17dp"
-        android:text="Monitoring Events:" />
+    android:background="@drawable/background"
+    tools:context=".MonitoringActivity">
 
     <EditText
         android:id="@+id/monitoringText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/enableButton"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="-1dp"
+        android:layout_marginTop="3dp"
         android:ems="10"
         android:gravity="left|top"
-        android:inputType="textMultiLine">
+        android:inputType="textMultiLine"
+        android:textColor="#FFFFFF">
 
         <requestFocus />
     </EditText>
 
     <Button
         android:id="@+id/enableButton"
-        android:layout_width="wrap_content"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="158dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/monitoringText"
+        android:layout_below="@+id/buttonAdminSetup"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="36dp"
+        android:background="#181E43"
         android:onClick="onEnableClicked"
-        android:text="Disable monitoring" />
+        android:text="Disable monitoring"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/buttonAdminSetup"
@@ -45,8 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/progressBar2"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="61dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="54dp"
         android:onClick="onAdminSetupClicked"
         android:text="Admin Setup" />
 
@@ -54,12 +51,16 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/monitoringText"
+        android:layout_below="@+id/textView15"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
         android:text="Log in:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFEB3B"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView16"
@@ -67,9 +68,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
-        android:text="Email:" />
+        android:text="Email:"
+        android:textColor="#FFEB3B"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/textView17"
@@ -77,44 +80,58 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView16"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="27dp"
-        android:text="Password:" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:text="Password:"
+        android:textColor="#FFEB3B"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/editTextTextNameLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView3"
-        android:layout_marginStart="103dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="23dp"
         android:layout_toEndOf="@+id/textView16"
+        android:background="#181E43"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:padding="5dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BFBDBD" />
 
     <EditText
         android:id="@+id/editTextTextPasswordLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextTextNameLogin"
-        android:layout_marginStart="81dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
         android:layout_toEndOf="@+id/textView17"
+        android:background="#181E43"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:padding="5dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#BFBDBD" />
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="119dp"
+        android:layout_height="65dp"
         android:layout_below="@+id/editTextTextPasswordLogin"
-        android:layout_marginStart="129dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="35dp"
         android:layout_toEndOf="@+id/progressBar2"
+        android:background="#181E43"
         android:onClick="onButtonLoginClicked"
-        android:text="Login" />
+        android:text="Login"
+        android:textColor="#FFEB3B"
+        android:textSize="24sp" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -124,7 +141,25 @@
         android:layout_below="@+id/textView17"
         android:layout_alignParentStart="true"
         android:layout_marginStart="71dp"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:background="#00FFFFFF" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="51dp"
+        android:layout_marginEnd="0dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="ATTENDANCE APP"
+        android:textColor="#FFEB3B"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
