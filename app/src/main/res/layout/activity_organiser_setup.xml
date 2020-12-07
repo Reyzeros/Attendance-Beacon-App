@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrganiserSetup" >
+    android:background="@drawable/background"
+    tools:context=".OrganiserSetup">
 
     <TextView
         android:id="@+id/textViewSetupOrganiserName"
@@ -13,7 +14,8 @@
         android:layout_marginStart="22dp"
         android:layout_marginTop="10dp"
         android:text="Organiser"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFEB3B" />
 
     <TextView
         android:id="@+id/textView12"
@@ -21,9 +23,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewSetupOrganiserName"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:text="Choose Group:" />
+        android:text="Choose Group:"
+        android:textColor="#FFEB3B" />
 
     <ListView
         android:id="@+id/listViewGroupsOrganiserSetup"
@@ -31,7 +34,7 @@
         android:layout_height="117dp"
         android:layout_below="@+id/textView14"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="21dp" />
 
     <TextView
@@ -40,9 +43,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewSetupOrganiserName"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="187dp"
-        android:text="Add or choose date:" />
+        android:text="Add or choose date:"
+        android:textColor="#FFEB3B" />
 
     <TextView
         android:id="@+id/textView14"
@@ -52,7 +56,8 @@
         android:layout_marginStart="71dp"
         android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/textView12"
-        android:text="Your choice:" />
+        android:text="Your choice:"
+        android:textColor="#FFEB3B" />
 
     <TextView
         android:id="@+id/textViewGroupChoice"
@@ -62,7 +67,8 @@
         android:layout_marginStart="22dp"
         android:layout_marginTop="14dp"
         android:layout_toEndOf="@+id/textView14"
-        android:text="empty" />
+        android:text="empty"
+        android:textColor="#FFEB3B" />
 
     <ListView
         android:id="@+id/ListViewDate"
@@ -70,7 +76,7 @@
         android:layout_height="131dp"
         android:layout_below="@+id/buttonAddDate"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="11dp" />
 
     <Button
@@ -79,10 +85,12 @@
         android:layout_height="61dp"
         android:layout_below="@+id/textView13"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="19dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="7dp"
+        android:background="#181E43"
         android:onClick="onAddDateClicked"
-        android:text="Create Attendance check with current Date" />
+        android:text="Create Attendance check with current Date"
+        android:textColor="#FFEB3B" />
 
     <Button
         android:id="@+id/buttonStartAttendance"
@@ -90,10 +98,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ListViewDate"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="17dp"
+        android:background="#181E43"
         android:onClick="onButtonStartAttendanceClicked"
-        android:text="Start Attendance Check" />
+        android:text="Start Attendance Check"
+        android:textColor="#FFEB3B" />
 
     <Button
         android:id="@+id/buttonStopAttendance"
@@ -101,10 +111,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonStartAttendance"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
+        android:background="#181E43"
         android:onClick="onButtonStopAttendanceClicked"
-        android:text="Stop Attendance Check" />
+        android:text="Stop Attendance Check"
+        android:textColor="#FFEB3B" />
 
     <Button
         android:id="@+id/buttonResults"
@@ -114,8 +126,10 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="12dp"
         android:layout_toEndOf="@+id/buttonStopAttendance"
+        android:background="#181E43"
         android:onClick="onButtonResultsClicked"
-        android:text="See Results" />
+        android:text="See Results"
+        android:textColor="#FFEB3B" />
 
     <TextView
         android:id="@+id/textViewDateShown"
@@ -124,5 +138,6 @@
         android:layout_below="@+id/ListViewDate"
         android:layout_marginStart="19dp"
         android:layout_marginTop="25dp"
-        android:layout_toEndOf="@+id/buttonStartAttendance" />
+        android:layout_toEndOf="@+id/buttonStartAttendance"
+        android:textColor="#FFEB3B" />
 </RelativeLayout>

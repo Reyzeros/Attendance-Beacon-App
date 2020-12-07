@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -229,11 +230,30 @@ fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCom
 						MonitoringActivity.this.startActivity(myIntent);
 					}
 					else{
-						choice=2;
-						progressBar.setVisibility(View.INVISIBLE);
-						Intent myIntent = new Intent(MonitoringActivity.this, OrganiserSetup.class);
-						myIntent.putExtra("USER_ID", userId);
-						MonitoringActivity.this.startActivity(myIntent);
+						Query query1=FirebaseDatabase.getInstance().getReference("Organisers").orderByChild("organiserId").equalTo(userId);
+						query1.addValueEventListener(new ValueEventListener() {
+							@Override
+							public void onDataChange(@NonNull DataSnapshot snapshot) {
+								if(snapshot.exists()){
+									choice=2;
+									progressBar.setVisibility(View.INVISIBLE);
+									Intent myIntent = new Intent(MonitoringActivity.this, OrganiserSetup.class);
+									myIntent.putExtra("USER_ID", userId);
+									MonitoringActivity.this.startActivity(myIntent);
+								}
+								else{
+									choice=3;
+									progressBar.setVisibility(View.INVISIBLE);
+									Intent myIntent = new Intent(MonitoringActivity.this, AdminSetup.class);
+									MonitoringActivity.this.startActivity(myIntent);
+								}
+							}
+
+							@Override
+							public void onCancelled(@NonNull DatabaseError error) {
+
+							}
+						});
 					}
 				}
 

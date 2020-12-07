@@ -140,8 +140,13 @@ public class RangingActivity extends Activity implements BeaconConsumer{
                new Timer().schedule(new TimerTask() {
                    @Override
                    public void run() {
-                      AttendanceActivity attendanceActivity=activityList.get(posI);
-                       isChecking=attendanceActivity.getActivityIsChecking();
+                       try {
+                           AttendanceActivity attendanceActivity = activityList.get(posI);
+                           isChecking = attendanceActivity.getActivityIsChecking();
+                       }
+                       catch (Exception e){
+                            System.out.println("Exception:"+e+"caught");
+                       }
                    }
                },0,100);
            }

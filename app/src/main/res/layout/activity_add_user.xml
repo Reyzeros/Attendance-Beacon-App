@@ -2,17 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddUser" >
+    android:background="@drawable/background"
+    tools:context=".AddUser">
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_below="@+id/textView6"
+        android:layout_below="@+id/textView7"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="64dp"
-        android:text="User E-mail:" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="User E-mail:"
+        android:textColor="#FFEB3B" />
 
     <TextView
         android:id="@+id/textView18"
@@ -20,9 +22,10 @@
         android:layout_height="30dp"
         android:layout_below="@+id/textView4"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="17dp"
-        android:text="User Password:" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="User Password:"
+        android:textColor="#FFEB3B" />
 
     <TextView
         android:id="@+id/textView6"
@@ -30,9 +33,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewGroupNameUser"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="29dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
-        android:text="Add User:" />
+        android:text="Add User:"
+        android:textColor="#FFEB3B" />
 
     <TextView
         android:id="@+id/textViewGroupNameUser"
@@ -43,19 +47,22 @@
         android:layout_marginStart="142dp"
         android:layout_marginTop="27dp"
         android:text="Brak"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFEB3B" />
 
     <EditText
         android:id="@+id/editTextUserName"
-        android:layout_width="181dp"
+        android:layout_width="167dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewGroupNameUser"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="69dp"
         android:layout_toEndOf="@+id/textView7"
+        android:background="#181E43"
         android:ems="10"
         android:hint="Name and Surname"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/textView7"
@@ -63,20 +70,25 @@
         android:layout_height="30dp"
         android:layout_below="@+id/textView6"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="15dp"
-        android:text="User Name and Surname:" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="User Name and Surname:"
+        android:textColor="#FFEB3B" />
 
     <Button
         android:id="@+id/buttonAddUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextUserPassword"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="52dp"
         android:layout_toEndOf="@+id/textView7"
+        android:background="#181E43"
         android:onClick="onAddUserClicked"
-        android:text="Add" />
+        android:padding="10dp"
+        android:text="Add"
+        android:textColor="#FFEB3B"
+        android:textSize="18sp" />
 
     <ListView
         android:id="@+id/listViewUsers"
@@ -89,27 +101,31 @@
 
     <EditText
         android:id="@+id/editTextUserPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="169dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextUserEmail"
-        android:layout_marginStart="63dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@+id/textView4"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="27dp"
+        android:layout_toEndOf="@+id/textView18"
+        android:background="#181E43"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/editTextUserEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="168dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextUserName"
-        android:layout_marginStart="65dp"
+        android:layout_marginStart="109dp"
         android:layout_marginTop="20dp"
         android:layout_toEndOf="@+id/textView4"
+        android:background="#181E43"
         android:ems="10"
         android:hint="Email"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -118,7 +134,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView18"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="69dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="30dp"
         android:visibility="invisible" />
 </RelativeLayout>

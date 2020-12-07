@@ -7,16 +7,19 @@
 
     <EditText
         android:id="@+id/monitoringText"
+        style="@android:style/Widget.AutoCompleteTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/enableButton"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="-1dp"
-        android:layout_marginTop="3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="-2dp"
+        android:background="#181E43"
         android:ems="10"
-        android:gravity="left|top"
-        android:inputType="textMultiLine"
-        android:textColor="#FFFFFF">
+        android:focusable="false"
+        android:gravity="center"
+        android:padding="5dp"
+        android:textColor="#FFEB3B">
 
         <requestFocus />
     </EditText>
@@ -26,26 +29,15 @@
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="158dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonAdminSetup"
+        android:layout_above="@+id/monitoringText"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="11dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginBottom="12dp"
         android:background="#181E43"
         android:onClick="onEnableClicked"
         android:text="Disable monitoring"
-        android:textColor="#FFFFFF" />
-
-    <Button
-        android:id="@+id/buttonAdminSetup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/progressBar2"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="54dp"
-        android:onClick="onAdminSetupClicked"
-        android:text="Admin Setup" />
+        android:textColor="#FFEB3B" />
 
     <TextView
         android:id="@+id/textView3"

@@ -2,19 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RangingActivity" >
+    android:background="@drawable/background"
+    tools:context=".RangingActivity">
 
     <EditText
         android:id="@+id/rangingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="14dp"
+        android:background="#181E43"
         android:ems="10"
         android:gravity="left|top"
-        android:inputType="textMultiLine">
+        android:inputType="textMultiLine"
+        android:textColor="#FFEB3B">
 
     </EditText>
 
@@ -24,10 +27,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/listViewDateUser"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="76dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="77dp"
+        android:layout_marginEnd="108dp"
+        android:background="#181E43"
         android:onClick="onConfirmAttendanceClicked"
-        android:text="Confirm Attendance" />
+        android:padding="10dp"
+        android:text="Confirm Attendance"
+        android:textColor="#FFEB3B"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textView"
@@ -35,9 +44,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/rangingText"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="49dp"
-        android:text="Choose the Organiser:" />
+        android:text="Choose the Organiser:"
+        android:textColor="#FFEB3B" />
 
     <TextView
         android:id="@+id/textView5"
@@ -47,21 +57,22 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"
         android:layout_marginTop="18dp"
-        android:text="Choose date:" />
+        android:text="Choose date:"
+        android:textColor="#FFEB3B" />
 
     <ListView
         android:id="@+id/listViewOrganisersUser"
-        android:layout_width="364dp"
-        android:layout_height="96dp"
+        android:layout_width="wrap_content"
+        android:layout_height="99dp"
         android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="31dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp" />
 
     <ListView
         android:id="@+id/listViewDateUser"
-        android:layout_width="374dp"
-        android:layout_height="105dp"
+        android:layout_width="379dp"
+        android:layout_height="104dp"
         android:layout_below="@+id/textView5"
         android:layout_alignParentStart="true"
         android:layout_marginStart="20dp"

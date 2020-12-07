@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AttendanceDisplay" >
+    android:background="@drawable/background"
+    tools:context=".AttendanceDisplay">
 
 
     <ListView
@@ -25,7 +26,8 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="38dp"
         android:text="List of Present People:"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFEB3B" />
 
     <TextView
         android:id="@+id/textViewDateAttendance"
@@ -34,7 +36,8 @@
         android:layout_below="@+id/textView2"
         android:layout_marginStart="86dp"
         android:layout_marginTop="30dp"
-        android:layout_toEndOf="@+id/textViewGroupNameAttendance" />
+        android:layout_toEndOf="@+id/textViewGroupNameAttendance"
+        android:textColor="#FFEB3B" />
 
     <TextView
         android:id="@+id/textViewGroupNameAttendance"
@@ -43,5 +46,6 @@
         android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="29dp" />
+        android:layout_marginTop="29dp"
+        android:textColor="#FFEB3B" />
 </RelativeLayout>
