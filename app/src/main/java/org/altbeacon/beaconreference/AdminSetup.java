@@ -47,7 +47,7 @@ public static final String GROUP_ID="groupID";
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_setup);
-
+        getWindow().setBackgroundDrawableResource(R.drawable.background);
         databaseOrganisers= FirebaseDatabase.getInstance().getReference("Organisers");
         databaseGroups=FirebaseDatabase.getInstance().getReference("Groups");
         fAuth=FirebaseAuth.getInstance();
@@ -94,9 +94,13 @@ public static final String GROUP_ID="groupID";
                                                                                                                  if(task.isSuccessful()){
                                                                                                                      progressBar.setVisibility(View.INVISIBLE);
                                                                                                                      String organiserId=fAuth.getCurrentUser().getUid();
-                                                                                                                     Organiser organiser= new Organiser(organiserId,organiserName, organiserEmail, organiserPassword,beaconId);
+                                                                                                                     Organiser organiser= new Organiser(organiserId,organiserName, organiserEmail, beaconId);
                                                                                                                      databaseOrganisers.child(organiserId).setValue(organiser);
                                                                                                                      Toast.makeText(AdminSetup.this,"Organiser Added!", Toast.LENGTH_LONG).show();
+                                                                                                                     editTextOrganiserName.getText().clear();
+                                                                                                                     editTextOrganiserEmail.getText().clear();
+                                                                                                                     editTextOrganiserPassword.getText().clear();
+                                                                                                                     editTextBeaconID.getText().clear();
                                                                                                                      fAuth.signOut();
                                                                                                                  }
                                                                                                                  else {
@@ -122,6 +126,7 @@ public static final String GROUP_ID="groupID";
             Group group= new Group(groupId,groupName);
             databaseGroups.child(groupId).setValue(group);
             Toast.makeText(this,"Group Added!", Toast.LENGTH_LONG).show();
+            editTextGroupName.getText().clear();
         }
         else{
             Toast.makeText(this,"Name cannot be empty!", Toast.LENGTH_LONG).show();
@@ -131,6 +136,7 @@ public static final String GROUP_ID="groupID";
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        fAuth.signOut();
     }
 
     @Override
@@ -182,4 +188,6 @@ public static final String GROUP_ID="groupID";
             }
         });
     }
+
+
 }

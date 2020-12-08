@@ -43,6 +43,7 @@ public class AddUser extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user);
+        getWindow().setBackgroundDrawableResource(R.drawable.background);
         textViewGroupName=(TextView) findViewById(R.id.textViewGroupNameUser);
         editTextUserName=(EditText) findViewById(R.id.editTextUserName);
         editTextUserPassword=(EditText) findViewById(R.id.editTextUserPassword);
@@ -106,6 +107,9 @@ public class AddUser extends Activity {
                         User user=new User(userId,userName,userEmail,groupId);
                         databaseUsers.child(userId).setValue(user);
                         Toast.makeText(AddUser.this,"User Added!", Toast.LENGTH_LONG).show();
+                        editTextUserName.getText().clear();
+                        editTextUserPassword.getText().clear();
+                        editTextUserEmail.getText().clear();
                         fAuth.signOut();
                       }
                     else {

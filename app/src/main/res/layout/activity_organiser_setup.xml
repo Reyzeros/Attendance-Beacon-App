@@ -89,7 +89,7 @@
         android:layout_marginTop="7dp"
         android:background="#181E43"
         android:onClick="onAddDateClicked"
-        android:text="Create Attendance check with current Date"
+        android:text="Create Attendance check with current date"
         android:textColor="#FFEB3B" />
 
     <Button
@@ -102,6 +102,7 @@
         android:layout_marginTop="17dp"
         android:background="#181E43"
         android:onClick="onButtonStartAttendanceClicked"
+        android:padding="10dp"
         android:text="Start Attendance Check"
         android:textColor="#FFEB3B" />
 
@@ -115,6 +116,7 @@
         android:layout_marginTop="15dp"
         android:background="#181E43"
         android:onClick="onButtonStopAttendanceClicked"
+        android:padding="10dp"
         android:text="Stop Attendance Check"
         android:textColor="#FFEB3B" />
 
@@ -123,11 +125,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonStartAttendance"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/buttonStopAttendance"
         android:background="#181E43"
         android:onClick="onButtonResultsClicked"
+        android:padding="10dp"
         android:text="See Results"
         android:textColor="#FFEB3B" />
 
@@ -136,7 +139,7 @@
         android:layout_width="144dp"
         android:layout_height="31dp"
         android:layout_below="@+id/ListViewDate"
-        android:layout_marginStart="19dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
         android:layout_toEndOf="@+id/buttonStartAttendance"
         android:textColor="#FFEB3B" />
