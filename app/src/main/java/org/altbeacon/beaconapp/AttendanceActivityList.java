@@ -1,4 +1,4 @@
-package org.altbeacon.beaconreference;
+package org.altbeacon.beaconapp;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,14 +12,14 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class IsPresentList extends ArrayAdapter<IsPresent> {
+public class AttendanceActivityList extends ArrayAdapter<AttendanceActivity> {
     private Activity context;
-    private List<IsPresent> isPresentList;
+    private List<AttendanceActivity> activityList;
 
-    public IsPresentList(Activity context,List<IsPresent> isPresentList){
-        super(context,R.layout.list_layout,isPresentList);
+    public AttendanceActivityList(Activity context,List<AttendanceActivity> activityList){
+        super(context,R.layout.list_layout,activityList);
         this.context=context;
-        this.isPresentList=isPresentList;
+        this.activityList=activityList;
     }
 
     @NonNull
@@ -28,8 +28,8 @@ public class IsPresentList extends ArrayAdapter<IsPresent> {
         LayoutInflater inflater=context.getLayoutInflater();
         View listViewItem=inflater.inflate(R.layout.list_layout,null,true);
         TextView textViewName=(TextView)listViewItem.findViewById(R.id.textViewOrganiserName);
-        IsPresent isPresent=isPresentList.get(position);
-        textViewName.setText(isPresent.getUserName());
+        AttendanceActivity attendanceActivity=activityList.get(position);
+        textViewName.setText(attendanceActivity.getActivityDate());
         return listViewItem;
     }
 }

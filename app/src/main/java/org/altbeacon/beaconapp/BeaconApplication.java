@@ -1,4 +1,4 @@
-package org.altbeacon.beaconreference;
+package org.altbeacon.beaconapp;
 
 import android.app.Application;
 import android.app.Notification;
@@ -8,8 +8,6 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
-
-import androidx.core.app.NotificationCompat;
 
 import android.os.Build;
 import android.util.Log;
@@ -26,7 +24,7 @@ public class BeaconApplication extends Application implements BootstrapNotifier 
     private static final String TAG = "BeaconReferenceApp";
     private RegionBootstrap regionBootstrap;
     private BackgroundPowerSaver backgroundPowerSaver;
-    private MonitoringActivity monitoringActivity = null;
+    private MainActivity mainActivity = null;
     private String cumulativeLog = "";
 
     public void onCreate() {
@@ -154,7 +152,7 @@ public class BeaconApplication extends Application implements BootstrapNotifier 
         }
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addNextIntent(new Intent(this, MonitoringActivity.class));
+        stackBuilder.addNextIntent(new Intent(this, MainActivity.class));
         PendingIntent resultPendingIntent =
                 stackBuilder.getPendingIntent(
                         0,
@@ -167,14 +165,14 @@ public class BeaconApplication extends Application implements BootstrapNotifier 
         notificationManager.notify(1, builder.build());
     }
 
-    public void setMonitoringActivity(MonitoringActivity activity) {
-        this.monitoringActivity = activity;
+    public void setMainActivity(MainActivity activity) {
+        this.mainActivity = activity;
     }
 
     private void logToDisplay(String line) {
         cumulativeLog = (line + "\n");
-        if (this.monitoringActivity != null) {
-            this.monitoringActivity.updateLog(cumulativeLog);
+        if (this.mainActivity != null) {
+            this.mainActivity.updateLog(cumulativeLog);
         }
     }
 

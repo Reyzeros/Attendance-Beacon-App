@@ -1,4 +1,4 @@
-package org.altbeacon.beaconreference;
+package org.altbeacon.beaconapp;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,7 +16,7 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent splashIntent=new Intent(SplashActivity.this,MonitoringActivity.class);
+                Intent splashIntent=new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(splashIntent);
                 overridePendingTransition(R.anim.slide_in_top,R.anim.slide_out_top);
                 finish();

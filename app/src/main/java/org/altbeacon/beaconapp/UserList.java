@@ -1,8 +1,6 @@
-package org.altbeacon.beaconreference;
+package org.altbeacon.beaconapp;
 
 import android.app.Activity;
-import android.content.Context;
-import android.icu.text.Transliterator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +12,14 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class OrganiserList extends ArrayAdapter<Organiser> {
+public class UserList extends ArrayAdapter<User> {
     private Activity context;
-    private List<Organiser> organizerList;
+    private List<User> userList;
 
-    public OrganiserList(Activity context,List<Organiser> organizerList){
-        super(context,R.layout.list_layout,organizerList);
-    this.context=context;
-    this.organizerList=organizerList;
+    public UserList(Activity context,List<User> userList){
+        super(context,R.layout.list_layout,userList);
+        this.context=context;
+        this.userList=userList;
     }
 
     @NonNull
@@ -30,10 +28,8 @@ public class OrganiserList extends ArrayAdapter<Organiser> {
         LayoutInflater inflater=context.getLayoutInflater();
         View listViewItem=inflater.inflate(R.layout.list_layout,null,true);
         TextView textViewName=(TextView)listViewItem.findViewById(R.id.textViewOrganiserName);
-        TextView textViewBeaconId=(TextView)listViewItem.findViewById(R.id.textViewOrganiserBeaconID);
-        Organiser organiser=organizerList.get(position);
-        textViewName.setText(organiser.getOrganiserName());
-        textViewBeaconId.setText(organiser.getOrganiserBeaconId());
+        User user=userList.get(position);
+        textViewName.setText(user.getUserName());
         return listViewItem;
     }
 }

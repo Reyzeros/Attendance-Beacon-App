@@ -1,4 +1,4 @@
-package org.altbeacon.beaconreference;
+package org.altbeacon.beaconapp;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -9,15 +9,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,17 +29,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconManager;
-import org.altbeacon.beacon.Region;
-
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.sql.SQLOutput;
-import java.util.Collection;
 
 
-public class MonitoringActivity extends Activity  {
+public class MainActivity extends Activity  {
 	protected static final String TAG = "MonitoringActivity";
 	private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
 	private static final int PERMISSION_REQUEST_BACKGROUND_LOCATION = 2;
@@ -215,7 +205,7 @@ fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCom
 	@Override
 	public void onComplete(@NonNull Task<AuthResult> task) {
 		if(task.isSuccessful()){
-			Toast.makeText(MonitoringActivity.this,"Logged in Successfully!", Toast.LENGTH_LONG).show();
+			Toast.makeText(MainActivity.this,"Logged in Successfully!", Toast.LENGTH_LONG).show();
 			userId=fAuth.getCurrentUser().getUid();
 
 			Query query= FirebaseDatabase.getInstance().getReference("Users").orderByChild("userId").equalTo(userId);
@@ -225,9 +215,9 @@ fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCom
 					if(snapshot.exists()){
 						choice=1;
 						progressBar.setVisibility(View.INVISIBLE);
-						Intent myIntent = new Intent(MonitoringActivity.this, RangingActivity.class);
+						Intent myIntent = new Intent(MainActivity.this, UserActivity.class);
 						myIntent.putExtra("USER_ID", userId);
-						MonitoringActivity.this.startActivity(myIntent);
+						MainActivity.this.startActivity(myIntent);
 					}
 					else{
 						Query query1=FirebaseDatabase.getInstance().getReference("Organisers").orderByChild("organiserId").equalTo(userId);
@@ -237,15 +227,15 @@ fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCom
 								if(snapshot.exists()){
 									choice=2;
 									progressBar.setVisibility(View.INVISIBLE);
-									Intent myIntent = new Intent(MonitoringActivity.this, OrganiserSetup.class);
+									Intent myIntent = new Intent(MainActivity.this, OrganiserSetup.class);
 									myIntent.putExtra("USER_ID", userId);
-									MonitoringActivity.this.startActivity(myIntent);
+									MainActivity.this.startActivity(myIntent);
 								}
 								else{
 									choice=3;
 									progressBar.setVisibility(View.INVISIBLE);
-									Intent myIntent = new Intent(MonitoringActivity.this, AdminSetup.class);
-									MonitoringActivity.this.startActivity(myIntent);
+									Intent myIntent = new Intent(MainActivity.this, AdminSetup.class);
+									MainActivity.this.startActivity(myIntent);
 								}
 							}
 
@@ -267,7 +257,7 @@ fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCom
 		}
 		else{
 			progressBar.setVisibility(View.INVISIBLE);
-			Toast.makeText(MonitoringActivity.this,"Error"+task.getException().getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(MainActivity.this,"Error"+task.getException().getMessage(), Toast.LENGTH_LONG).show();
 		}
 
 	}
@@ -284,14 +274,14 @@ fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCom
     public void onResume() {
         super.onResume();
         BeaconApplication application = ((BeaconApplication) this.getApplicationContext());
-        application.setMonitoringActivity(this);
+        application.setMainActivity(this);
         updateLog(application.getLog());
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        ((BeaconApplication) this.getApplicationContext()).setMonitoringActivity(null);
+        ((BeaconApplication) this.getApplicationContext()).setMainActivity(null);
     }
 
 	private void verifyBluetooth() {
@@ -335,7 +325,7 @@ fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCom
     public void updateLog(final String log) {
     	runOnUiThread(new Runnable() {
     	    public void run() {
-    	    	EditText editText = (EditText)MonitoringActivity.this
+    	    	EditText editText = (EditText) MainActivity.this
     					.findViewById(R.id.monitoringText);
        	    	editText.setText(log);
     	    }

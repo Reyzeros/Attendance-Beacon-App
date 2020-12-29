@@ -1,6 +1,5 @@
-package org.altbeacon.beaconreference;
+package org.altbeacon.beaconapp;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.TimerTask;
 
 import android.app.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.text.TextUtils;
@@ -32,15 +30,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import org.altbeacon.beacon.AltBeacon;
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
 import org.altbeacon.beacon.BeaconManager;
-import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
-public class RangingActivity extends Activity implements BeaconConsumer{
+public class UserActivity extends Activity implements BeaconConsumer{
     protected static final String TAG = "RangingActivity";
     static String beaconId;
     TextView textViewOrganiserUser,textViewDateUser;
@@ -118,7 +114,7 @@ public class RangingActivity extends Activity implements BeaconConsumer{
                             AttendanceActivity attendanceActivity= activitySnapshot.getValue(AttendanceActivity.class);
                             activityList.add(attendanceActivity);
                         }
-                        AttendanceActivityList adapter= new AttendanceActivityList(RangingActivity.this,activityList);
+                        AttendanceActivityList adapter= new AttendanceActivityList(UserActivity.this,activityList);
                         listViewAttendanceActivity.setAdapter(adapter);
                     }
 
@@ -225,7 +221,7 @@ public class RangingActivity extends Activity implements BeaconConsumer{
     private void logToDisplay(final String line) {
         runOnUiThread(new Runnable() {
             public void run() {
-                EditText editText = (EditText)RangingActivity.this.findViewById(R.id.rangingText);
+                EditText editText = (EditText) UserActivity.this.findViewById(R.id.rangingText);
                 editText.setText(line);
             }
         });
@@ -242,7 +238,7 @@ public class RangingActivity extends Activity implements BeaconConsumer{
                     Organiser organiser=organiserSnapshot.getValue(Organiser.class);
                     organiserList.add(organiser);
                 }
-                OrganiserList adapter=new OrganiserList(RangingActivity.this,organiserList);
+                OrganiserList adapter=new OrganiserList(UserActivity.this,organiserList);
                 listViewOrganisers.setAdapter(adapter);
             }
 

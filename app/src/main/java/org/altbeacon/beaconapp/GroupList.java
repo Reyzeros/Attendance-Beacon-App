@@ -1,4 +1,4 @@
-package org.altbeacon.beaconreference;
+package org.altbeacon.beaconapp;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,14 +12,14 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class AttendanceActivityList extends ArrayAdapter<AttendanceActivity> {
+public class GroupList extends ArrayAdapter<Group> {
     private Activity context;
-    private List<AttendanceActivity> activityList;
+    private List<Group> groupList;
 
-    public AttendanceActivityList(Activity context,List<AttendanceActivity> activityList){
-        super(context,R.layout.list_layout,activityList);
+    public GroupList(Activity context,List<Group> groupList){
+        super(context,R.layout.list_layout,groupList);
         this.context=context;
-        this.activityList=activityList;
+        this.groupList=groupList;
     }
 
     @NonNull
@@ -28,10 +28,8 @@ public class AttendanceActivityList extends ArrayAdapter<AttendanceActivity> {
         LayoutInflater inflater=context.getLayoutInflater();
         View listViewItem=inflater.inflate(R.layout.list_layout,null,true);
         TextView textViewName=(TextView)listViewItem.findViewById(R.id.textViewOrganiserName);
-        AttendanceActivity attendanceActivity=activityList.get(position);
-        textViewName.setText(attendanceActivity.getActivityDate());
+        Group group=groupList.get(position);
+        textViewName.setText(group.getGroupName());
         return listViewItem;
     }
 }
-
-

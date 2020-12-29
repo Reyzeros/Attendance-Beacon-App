@@ -1,4 +1,4 @@
-package org.altbeacon.beaconreference;
+package org.altbeacon.beaconapp;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,14 +12,14 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class GroupList extends ArrayAdapter<Group> {
+public class OrganiserList extends ArrayAdapter<Organiser> {
     private Activity context;
-    private List<Group> groupList;
+    private List<Organiser> organizerList;
 
-    public GroupList(Activity context,List<Group> groupList){
-        super(context,R.layout.list_layout,groupList);
-        this.context=context;
-        this.groupList=groupList;
+    public OrganiserList(Activity context,List<Organiser> organizerList){
+        super(context,R.layout.list_layout,organizerList);
+    this.context=context;
+    this.organizerList=organizerList;
     }
 
     @NonNull
@@ -28,8 +28,10 @@ public class GroupList extends ArrayAdapter<Group> {
         LayoutInflater inflater=context.getLayoutInflater();
         View listViewItem=inflater.inflate(R.layout.list_layout,null,true);
         TextView textViewName=(TextView)listViewItem.findViewById(R.id.textViewOrganiserName);
-        Group group=groupList.get(position);
-        textViewName.setText(group.getGroupName());
+        TextView textViewBeaconId=(TextView)listViewItem.findViewById(R.id.textViewOrganiserBeaconID);
+        Organiser organiser=organizerList.get(position);
+        textViewName.setText(organiser.getOrganiserName());
+        textViewBeaconId.setText(organiser.getOrganiserBeaconId());
         return listViewItem;
     }
 }

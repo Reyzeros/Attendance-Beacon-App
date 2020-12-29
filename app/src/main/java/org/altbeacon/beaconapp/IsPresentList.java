@@ -1,4 +1,4 @@
-package org.altbeacon.beaconreference;
+package org.altbeacon.beaconapp;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -12,14 +12,14 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class UserList extends ArrayAdapter<User> {
+public class IsPresentList extends ArrayAdapter<IsPresent> {
     private Activity context;
-    private List<User> userList;
+    private List<IsPresent> isPresentList;
 
-    public UserList(Activity context,List<User> userList){
-        super(context,R.layout.list_layout,userList);
+    public IsPresentList(Activity context,List<IsPresent> isPresentList){
+        super(context,R.layout.list_layout,isPresentList);
         this.context=context;
-        this.userList=userList;
+        this.isPresentList=isPresentList;
     }
 
     @NonNull
@@ -28,8 +28,10 @@ public class UserList extends ArrayAdapter<User> {
         LayoutInflater inflater=context.getLayoutInflater();
         View listViewItem=inflater.inflate(R.layout.list_layout,null,true);
         TextView textViewName=(TextView)listViewItem.findViewById(R.id.textViewOrganiserName);
-        User user=userList.get(position);
-        textViewName.setText(user.getUserName());
+        IsPresent isPresent=isPresentList.get(position);
+        textViewName.setText(isPresent.getUserName());
         return listViewItem;
     }
 }
+
+
