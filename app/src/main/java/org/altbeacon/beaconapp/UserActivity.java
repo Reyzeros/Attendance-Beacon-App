@@ -63,7 +63,7 @@ public class UserActivity extends Activity implements BeaconConsumer{
         chosenOrganiserId="";
         chosenActivityId="";
         isChosen=false;
-        setContentView(R.layout.activity_ranging);
+        setContentView(R.layout.activity_user);
         textViewDateUser=(TextView) findViewById(R.id.textViewDateUser);
         textViewOrganiserUser=(TextView) findViewById(R.id.textViewOrganiserUser);
         listViewAttendanceActivity=(ListView) findViewById(R.id.listViewDateUser);

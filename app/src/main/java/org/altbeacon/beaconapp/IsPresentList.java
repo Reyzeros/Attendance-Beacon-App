@@ -27,7 +27,7 @@ public class IsPresentList extends ArrayAdapter<IsPresent> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
         View listViewItem=inflater.inflate(R.layout.list_layout,null,true);
-        TextView textViewName=(TextView)listViewItem.findViewById(R.id.textViewOrganiserName);
+        TextView textViewName=(TextView)listViewItem.findViewById(R.id.textViewName);
         IsPresent isPresent=isPresentList.get(position);
         textViewName.setText(isPresent.getUserName());
         return listViewItem;

@@ -2,9 +2,9 @@ package org.altbeacon.beaconapp;
 
 public class User {
    private String userId;
-    private String userName;
+   private String userName;
    private String userEmail;
-    private String  groupId;
+   private String  groupId;
 
    public User(){
 

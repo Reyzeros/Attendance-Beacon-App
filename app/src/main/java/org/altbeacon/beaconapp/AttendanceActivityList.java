@@ -27,7 +27,7 @@ public class AttendanceActivityList extends ArrayAdapter<AttendanceActivity> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
         View listViewItem=inflater.inflate(R.layout.list_layout,null,true);
-        TextView textViewName=(TextView)listViewItem.findViewById(R.id.textViewOrganiserName);
+        TextView textViewName=(TextView)listViewItem.findViewById(R.id.textViewName);
         AttendanceActivity attendanceActivity=activityList.get(position);
         textViewName.setText(attendanceActivity.getActivityDate());
         return listViewItem;

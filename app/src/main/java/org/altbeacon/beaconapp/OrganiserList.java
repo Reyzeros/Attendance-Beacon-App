@@ -27,8 +27,8 @@ public class OrganiserList extends ArrayAdapter<Organiser> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater=context.getLayoutInflater();
         View listViewItem=inflater.inflate(R.layout.list_layout,null,true);
-        TextView textViewName=(TextView)listViewItem.findViewById(R.id.textViewOrganiserName);
-        TextView textViewBeaconId=(TextView)listViewItem.findViewById(R.id.textViewOrganiserBeaconID);
+        TextView textViewName=(TextView)listViewItem.findViewById(R.id.textViewName);
+        TextView textViewBeaconId=(TextView)listViewItem.findViewById(R.id.textViewName2);
         Organiser organiser=organizerList.get(position);
         textViewName.setText(organiser.getOrganiserName());
         textViewBeaconId.setText(organiser.getOrganiserBeaconId());

@@ -11,7 +11,6 @@ public class AttendanceActivity {
 
     public AttendanceActivity(String activityId, String activityDate) {
         this.activityId = activityId;
-      //  this.activityRelation = activityRelation;
         this.activityDate = activityDate;
         this.activityIsChecking=false;
     }
